@@ -14,12 +14,27 @@ export class Pomodoro {
     this.currentTimer = new Timer(this.workDuration);
   }
 
-  //TODO:
-  startWork() {}
+  startWork() {
+    this.currentTimer = new Timer(this.workDuration);
+    this.currentTimer.start();
+  }
 
-  startBreak() {}
+  startBreak() {
+    this.currentTimer = new Timer(this.breakDuration);
+    this.currentTimer.start();
+  }
 
-  completeCycle() {}
+  completeCycle() {
+    if (this.currentCycle < this.cycles) {
+      this.currentCycle += 1;
+      this.startWork();
+    } else {
+      this.resetPomodoro();
+    }
+  }
 
-  resetPomodoro() {}
+  resetPomodoro() {
+    this.currentCycle = 0;
+    this.currentTimer.reset();
+  }
 }

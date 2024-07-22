@@ -9,12 +9,30 @@ export class Timer {
     this.remainingTime = duration;
   }
 
-  //TODO:
-  start() {}
+  start() {
+    if (!this.isRunning) {
+      this.isRunning = true;
+      this.intervalId = setInterval(() => this.tick(), 1000);
+    }
+  }
 
-  pause() {}
+  pause() {
+    if (this.isRunning && this.intervalId) {
+      clearInterval(this.intervalId);
+      this.isRunning = false;
+    }
+  }
 
-  reset() {}
+  reset() {
+    this.pause();
+    this.remainingTime = this.duration;
+  }
 
-  tick() {}
+  tick() {
+    if (this.remainingTime > 0) {
+      this.remainingTime -= 1;
+    } else {
+      this.pause();
+    }
+  }
 }
